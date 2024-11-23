@@ -46,18 +46,29 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
 
               //email input
-              InputTextWidget(
-                textEditingController: emailTextEditingController,
-                lableString: "Email",
-                iconData: Icons.email_outlined,
-                isObscure: false,
+              Container(
+                width: MediaQuery.of(context).size.width,
+                margin: const EdgeInsets.symmetric(horizontal: 20),
+                child: InputTextWidget(
+                  textEditingController: emailTextEditingController,
+                  lableString: "Email",
+                  iconData: Icons.email_outlined,
+                  isObscure: false,
+                ),
+              ),
+              const SizedBox(
+                height: 25,
               ),
               //password input
-              InputTextWidget(
-                textEditingController: passwordTextEditingController,
-                lableString: "Password",
-                iconData: Icons.lock_outline,
-                isObscure: true,
+              Container(
+                width: MediaQuery.of(context).size.width,
+                margin: const EdgeInsets.symmetric(horizontal: 20),
+                child: InputTextWidget(
+                  textEditingController: passwordTextEditingController,
+                  lableString: "Password",
+                  iconData: Icons.lock_outline,
+                  isObscure: true,
+                ),
               ),
             ],
           ),
