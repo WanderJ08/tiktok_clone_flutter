@@ -21,7 +21,32 @@ class InputTextWidget extends StatelessWidget {
       controller: textEditingController,
       decoration: InputDecoration(
         labelText: lableString,
+        prefixIcon: iconData != null
+            ? Icon(iconData)
+            : Padding(
+                padding: const EdgeInsets.all(8),
+                child: Image.asset(
+                  assetReference!,
+                  width: 10,
+                ),
+              ),
+        labelStyle: const TextStyle(
+          fontSize: 18,
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(6),
+          borderSide: const BorderSide(
+            color: Colors.grey,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(6),
+          borderSide: const BorderSide(
+            color: Colors.grey,
+          ),
+        ),
       ),
+      obscureText: isObscure,
     );
   }
 }
