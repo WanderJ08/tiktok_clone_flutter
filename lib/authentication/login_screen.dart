@@ -71,6 +71,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   isObscure: true,
                 ),
               ),
+              const SizedBox(
+                height: 25,
+              ),
               //Login button
               //not have an account, signup now button
               showProgressBar == false
@@ -105,6 +108,32 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                         ),
+
+                        //not have an account, signup now button
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text(
+                              "Dont't have an account?",
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 16,
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                //send user to signup screen
+                              },
+                              child: const Text(
+                                "Signup now",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
+                        )
                       ],
                     )
                   : Container(
