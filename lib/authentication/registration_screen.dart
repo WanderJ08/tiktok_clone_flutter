@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
-import 'package:tiktok_clone/authentication/registration_screen.dart';
+import 'package:tiktok_clone/authentication/login_screen.dart';
 import 'package:tiktok_clone/widgets/input_text_widgets.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
-
+class RegistrationScreen extends StatefulWidget {
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegistrationScreen> createState() => _RegistrationScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegistrationScreenState extends State<RegistrationScreen> {
+  TextEditingController userNameTextEditingController = TextEditingController();
   TextEditingController emailTextEditingController = TextEditingController();
   TextEditingController passwordTextEditingController = TextEditingController();
   bool showProgressBar = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,28 +26,52 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(
                 height: 100,
               ),
-              Image.asset(
-                "images/tiktok.png",
-                width: 200,
-              ),
               Text(
-                "Welcome",
+                "Create Account",
                 style: GoogleFonts.acme(
                     fontSize: 34,
                     color: Colors.grey,
                     fontWeight: FontWeight.bold),
               ),
               Text(
-                "Glad to see you!",
+                "To get started now!",
                 style: GoogleFonts.acme(
                   fontSize: 34,
                   color: Colors.grey,
                 ),
               ),
               const SizedBox(
-                height: 30,
+                height: 16,
+              ),
+              //profile image
+              GestureDetector(
+                onTap: (
+                    //Allow user to select profile image
+
+                    ) {},
+                child: const CircleAvatar(
+                  radius: 80,
+                  backgroundImage: AssetImage("images/profile_avatar.jpg"),
+                ),
               ),
 
+              const SizedBox(
+                height: 30,
+              ),
+              //user name input
+              Container(
+                width: MediaQuery.of(context).size.width,
+                margin: const EdgeInsets.symmetric(horizontal: 20),
+                child: InputTextWidget(
+                  textEditingController: userNameTextEditingController,
+                  lableString: "Username",
+                  iconData: Icons.person_outline,
+                  isObscure: false,
+                ),
+              ),
+              const SizedBox(
+                height: 25,
+              ),
               //email input
               Container(
                 width: MediaQuery.of(context).size.width,
@@ -102,7 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             },
                             child: const Center(
                               child: Text(
-                                "Login",
+                                "Sign Up",
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 20,
@@ -117,7 +140,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             const Text(
-                              "Dont't have an account?",
+                              "Already have an account?",
                               style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 16,
@@ -126,10 +149,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             InkWell(
                               onTap: () {
                                 //send user to signup screen
-                                Get.to(RegistrationScreen());
+                                Get.to(LoginScreen());
                               },
                               child: const Text(
-                                " Signup now",
+                                " Login now",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 18,
