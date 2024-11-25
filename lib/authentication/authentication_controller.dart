@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'dart:io';
 
@@ -29,5 +30,16 @@ class AuthenticationController extends GetxController {
           "you have successfully captured your profile image with Phone Camera.");
     }
     _pickedFile = Rx<File?>(File(pickedImageFile!.path));
+  }
+
+  void createAccountforNewUser(File imageFile, String userName,
+      String userEmail, String userPassword) async {
+    //create user in the firebase authentication
+    UserCredential credential = await FirebaseAuth.instance
+        .createUserWithEmailAndPassword(
+            email: userEmail, password: userPassword);
+    //save the user profile image to firesebase storage
+
+    //save user data to the firestore database
   }
 }

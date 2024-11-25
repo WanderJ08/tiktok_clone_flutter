@@ -7,6 +7,8 @@ import 'package:tiktok_clone/authentication/authentication_controller.dart';
 import 'package:tiktok_clone/authentication/login_screen.dart';
 import 'package:tiktok_clone/widgets/input_text_widgets.dart';
 
+import '../global.dart';
+
 class RegistrationScreen extends StatefulWidget {
   @override
   State<RegistrationScreen> createState() => _RegistrationScreenState();
@@ -16,7 +18,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   TextEditingController userNameTextEditingController = TextEditingController();
   TextEditingController emailTextEditingController = TextEditingController();
   TextEditingController passwordTextEditingController = TextEditingController();
-  bool showProgressBar = false;
 
   var authenticationController = AuthenticationController.instanceAuth;
 
@@ -122,11 +123,25 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           ),
                           child: InkWell(
                             onTap: () {
-                              setState(() {
-                                showProgressBar = true;
-                              });
-
-                              //login user now
+                              if (authenticationController
+                                          .profileImage !=
+                                      null &&
+                                  userNameTextEditingController
+                                      .text.isNotEmpty &&
+                                  emailTextEditingController.text.isNotEmpty &&
+                                  passwordTextEditingController
+                                      .text.isNotEmpty) {
+                                setState(() {
+                                  showProgressBar = true;
+                                });
+                                authenticationController
+                                    .createAccountforNewUser(
+                                        authenticationController.profileImage!,
+                                        userNameTextEditingController.text,
+                                        emailTextEditingController.text,
+                                        passwordTextEditingController.text);
+                              }
+                              //Create a new account for user
                             },
                             child: const Center(
                               child: Text(
