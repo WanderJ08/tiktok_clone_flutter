@@ -8,7 +8,7 @@ class UploadVideoScreen extends StatefulWidget {
 }
 
 class _UploadVideoScreenState extends State<UploadVideoScreen> {
-  @override
+  
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
