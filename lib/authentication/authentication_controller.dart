@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
 import 'package:tiktok_clone/authentication/login_screen.dart';
+import 'package:tiktok_clone/authentication/registration_screen.dart';
 import 'package:tiktok_clone/global.dart';
 import 'dart:io';
 import 'user.dart' as userModel;
@@ -61,6 +62,8 @@ class AuthenticationController extends GetxController {
 
       Get.snackbar("Account Created",
           "Congratulations your account has been created successfully.");
+      showProgressBar = false;
+      Get.to(LoginScreen());
     } catch (error) {
       Get.snackbar("Account creation unsuccessful",
           "Error occured while creating user account.");
@@ -81,5 +84,22 @@ class AuthenticationController extends GetxController {
     String downloadUrlOfUploadedImage = await taskSnapshot.ref.getDownloadURL();
 
     return downloadUrlOfUploadedImage;
+  }
+
+  void loginUserNow(String userEmail, String userPassword) async {
+    try {
+      await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: userEmail, password: userPassword);
+
+      Get.snackbar("Logged-in Successful",
+          "Congratulations, you're logged-in successfully.");
+      showProgressBar = false;
+      Get.to(RegistrationScreen());
+    } catch (error) {
+      Get.snackbar(
+          "Login unsuccessful", "Error occured during authentication process.");
+      showProgressBar = false;
+      Get.to(RegistrationScreen());
+    }
   }
 }
