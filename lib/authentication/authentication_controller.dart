@@ -3,15 +3,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
+import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:tiktok_clone/authentication/login_screen.dart';
 import 'package:tiktok_clone/authentication/registration_screen.dart';
 import 'package:tiktok_clone/global.dart';
+import 'package:tiktok_clone/home/home_screen.dart';
 import 'dart:io';
 import 'user.dart' as userModel;
 import 'package:image_picker/image_picker.dart';
 
 class AuthenticationController extends GetxController {
   static AuthenticationController instanceAuth = Get.find();
+  late Rx<User?> _currentUser;
 
   late Rx<File?> _pickedFile;
   File? get profileImage => _pickedFile.value;
@@ -99,7 +102,26 @@ class AuthenticationController extends GetxController {
       Get.snackbar(
           "Login unsuccessful", "Error occured during authentication process.");
       showProgressBar = false;
-      Get.to(RegistrationScreen());
     }
+  }
+
+  goToScreen(User? currentUser) {
+    if (currentUser == null) {
+      //When user is NOT logged-in
+      Get.offAll(LoginScreen());
+    }
+    //When user is logged-in
+    else {
+      Get.offAll(HomeScreen());
+    }
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
+
+    _currentUser = Rx<User?>(FirebaseAuth.instance.currentUser);
+    _currentUser.bindStream(FirebaseAuth.instance.authStateChanges());
+    ever(_currentUser, goToScreen);
   }
 }
