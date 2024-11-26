@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
+import 'package:tiktok_clone/authentication/authentication_controller.dart';
 import 'package:tiktok_clone/authentication/registration_screen.dart';
+import 'package:tiktok_clone/global.dart';
 import 'package:tiktok_clone/widgets/input_text_widgets.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -16,6 +18,7 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailTextEditingController = TextEditingController();
   TextEditingController passwordTextEditingController = TextEditingController();
   bool showProgressBar = false;
+  var authenticationController = AuthenticationController.instanceAuth;
 
   @override
   Widget build(BuildContext context) {
@@ -94,11 +97,17 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           child: InkWell(
                             onTap: () {
-                              setState(() {
-                                showProgressBar = true;
-                              });
-
                               //login user now
+                              if (emailTextEditingController.text.isNotEmpty &&
+                                  passwordTextEditingController
+                                      .text.isNotEmpty) {
+                                setState(() {
+                                  showProgressBar = true;
+                                });
+                                authenticationController.loginUserNow(
+                                    emailTextEditingController.text,
+                                    passwordTextEditingController.text);
+                              }
                             },
                             child: const Center(
                               child: Text(
