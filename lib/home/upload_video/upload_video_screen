@@ -8,14 +8,34 @@ class UploadVideoScreen extends StatefulWidget {
 }
 
 class _UploadVideoScreenState extends State<UploadVideoScreen> {
-  
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text(
-          "Upload New Video Screen",
-          style: TextStyle(color: Colors.white),
-        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset('images/uploadimage.png'
+            width: 260,),
+
+            const SizedBox(height: 20,),
+
+            ElevatedButton(
+              onPressed: (){
+                //Display dialog box
+              },
+              style: ElevatedButton.stylefrom(
+                backgroundColor: Colors.green,
+              ),
+              child: const Text('Upload New Video',
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.white,
+                fontweight: FontWeight.bold
+              ),),
+            )
+          ]
+        )
       ),
     );
   }

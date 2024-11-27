@@ -4,7 +4,7 @@ import 'package:tiktok_clone/home/following/followings_video_screen.dart';
 import 'package:tiktok_clone/home/for_you/for_you_video_screen.dart';
 import 'package:tiktok_clone/home/search/search_screen.dart';
 import 'package:tiktok_clone/home/upload_video/upload_custom_icon.dart';
-import 'package:tiktok_clone/home/upload_video/upload_video_screen.dart';
+import 'package:tiktok_clone/home/upload_video/upload_video_screen';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
