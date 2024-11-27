@@ -154,7 +154,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             ),
                           ),
                         ),
-
+                        const SizedBox(
+                          height: 15,
+                        ),
                         //not have an account, signup now button
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
