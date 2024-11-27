@@ -44,6 +44,7 @@ dependencies:
   simple_circular_progress_bar: ^1.0.2
   get: ^4.6.6
   firebase_storage: ^12.3.6
+  video_player: ^2.9.2
 
 dev_dependencies:
   flutter_test:
