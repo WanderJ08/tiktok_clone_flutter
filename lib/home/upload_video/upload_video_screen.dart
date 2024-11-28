@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:get/get.dart'; // Importación de Get
+import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:tiktok_clone/home/upload_video/upload_form.dart'; // Importación de Get
 
 class UploadVideoScreen extends StatefulWidget {
   const UploadVideoScreen({super.key});
@@ -9,7 +13,7 @@ class UploadVideoScreen extends StatefulWidget {
 }
 
 class _UploadVideoScreenState extends State<UploadVideoScreen> {
-  getVideoFile(ImageSource sourceImg) asymch{
+  getVideoFile(ImageSource sourceImg) async {
     final videoFile = await ImagePicker().pickVideo(source: sourceImg);
     if (videoFile != null) {
       //video upload form
@@ -18,7 +22,7 @@ class _UploadVideoScreenState extends State<UploadVideoScreen> {
           videoFile: File(videoFile.path),
           videoPath: videoFile.path,
         ),
-      )
+      );
     }
   }
 
