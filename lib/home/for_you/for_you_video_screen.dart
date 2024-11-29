@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -88,9 +89,130 @@ class _ForYouVideoScreenState extends State<ForYouVideoScreen> {
                                       style: GoogleFonts.alexBrush(
                                           fontSize: 16, color: Colors.white),
                                     ),
-                                  )
+                                  ),
+
+                                  //right panel
+                                  Container(
+                                    width: 100,
+                                    margin: EdgeInsets.only(
+                                        top:
+                                            MediaQuery.of(context).size.height /
+                                                5),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        SizedBox(
+                                          width: 62,
+                                          height: 62,
+                                          child: Stack(
+                                            children: [
+                                              Positioned(
+                                                left: 4,
+                                                child: Container(
+                                                  width: 52,
+                                                  height: 52,
+                                                  padding:
+                                                      const EdgeInsets.all(2),
+                                                  decoration: BoxDecoration(
+                                                      color: Colors.white,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              25)),
+                                                  child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              25),
+                                                      child: Image(
+                                                        image: NetworkImage(
+                                                            eachVideoInfo
+                                                                .userProfileImage
+                                                                .toString()),
+                                                      )),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+
+                                        //like button - total likes
+                                        Column(
+                                          children: [
+                                            //LIKE BUTTON
+                                            IconButton(
+                                              onPressed: () {},
+                                              icon: Icon(
+                                                Icons.favorite_rounded,
+                                                size: 40,
+                                                color: eachVideoInfo.likesList!
+                                                        .contains(FirebaseAuth
+                                                            .instance
+                                                            .currentUser!
+                                                            .uid)
+                                                    ? Colors.red
+                                                    : Colors.white,
+                                              ),
+                                            ),
+
+                                            //TOTAL LIKES
+                                            Text(
+                                              eachVideoInfo.likesList!.length
+                                                  .toString(),
+                                              style: const TextStyle(
+                                                  fontSize: 20,
+                                                  color: Colors.white),
+                                            ),
+
+                                            //comments button - total comments
+                                        Column(
+                                          children: [
+                                            //comment BUTTON
+                                            IconButton(
+                                              onPressed: () {},
+                                              icon: const Icon(
+                                                Icons.add_comment,
+                                                size: 40,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+
+                                            //TOTAL comments
+                                            Text(
+                                              eachVideoInfo.totalComments!
+                                                  .toString(),
+                                              style: const TextStyle(
+                                                  fontSize: 20,
+                                                  color: Colors.white),
+                                            ),
+
+                                            //shared button - total shares
+                                        Column(
+                                          children: [
+                                            //SHARE BUTTON
+                                            IconButton(
+                                              onPressed: () {},
+                                              icon: const Icon(
+                                                Icons.share,
+                                                size: 40,
+                                                color: Colors.white
+                                              ),
+                                            ),
+
+                                            //TOTAL LIKES
+                                            Text(
+                                              eachVideoInfo.totalShares!
+                                                  .toString(),
+                                              style: const TextStyle(
+                                                  fontSize: 20,
+                                                  color: Colors.white),
+                                            )
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ],
-                              )
+                              ),
                             ],
                           ),
                         ))
