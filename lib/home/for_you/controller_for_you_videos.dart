@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import "package:get/get.dart";
 import '../upload_video/video.dart';
 
@@ -21,5 +22,32 @@ class ControllerForYouVideos extends GetxController {
       }
       return videosList;
     }));
+  }
+
+  likeOrUnlikeVideo(String videoID) async {
+    var currentUserID = FirebaseAuth.instance.currentUser!.uid.toString();
+
+    DocumentSnapshot snapshotDoc = await FirebaseFirestore.instance
+        .collection("videos")
+        .doc(videoID)
+        .get();
+
+    //if already liked or not liked
+    if ((snapshotDoc.data() as dynamic)["likesList"].contains(currentUserID)) {
+      await FirebaseFirestore.instance
+          .collection("videos")
+          .doc(videoID)
+          .update({
+        "likesList": FieldValue.arrayRemove([currentUserID]),
+      });
+      //if not like
+    } else {
+      await FirebaseFirestore.instance
+          .collection("videos")
+          .doc(videoID)
+          .update({
+        "likesList": FieldValue.arrayUnion([currentUserID]),
+      });
+    }
   }
 }
