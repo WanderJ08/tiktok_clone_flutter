@@ -20,7 +20,7 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
     playerController = VideoPlayerController.network(widget.videoFileUrl)
       ..initialize().then((value) {
         playerController!.play();
-        playerController!.setLooping(true);
+        playerController!.setLooping(false);
         playerController!.setVolume(2);
       });
   }

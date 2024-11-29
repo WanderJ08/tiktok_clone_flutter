@@ -11,11 +11,11 @@ class UploadController extends GetxController {
   compressVideoFile(String videoFilePath) async {
     final compressVideoFilePath = await VideoCompress.compressVideo(
         videoFilePath,
-        quality: VideoQuality.MediumQuality);
+        quality: VideoQuality.LowQuality);
     return compressVideoFilePath!.file;
   }
 
-  uploadCompressedVideoFiletoFirebaseStorage(
+  uploadCompressedVideoFileToFirebaseStorage(
       String videoID, String videoFilePath) async {
     UploadTask videoUploadTask = FirebaseStorage.instance
         .ref()
@@ -63,11 +63,11 @@ class UploadController extends GetxController {
       String videoID = DateTime.now().millisecondsSinceEpoch.toString();
 
       //1. Upload video to firebase storage
-      String VideoDownloadUrl =
-          await uploadCompressedVideoFiletoFirebaseStorage(
+      String videoDownloadUrl =
+          await uploadCompressedVideoFileToFirebaseStorage(
               videoID, videoFilePath);
       //2.Upload thumbnail to firebase storage
-      String ThumbnailDownloadUrl =
+      String thumbnailDownloadUrl =
           await uploadThumbnailImagetoFirebaseStorage(videoID, videoFilePath);
 
       //3. Save video information to firestore database
@@ -82,8 +82,8 @@ class UploadController extends GetxController {
         likesList: [],
         artistSongName: artistSongName,
         descriptionTags: descriptionTags,
-        videoUrl: VideoDownloadUrl,
-        thumbnailUrl: ThumbnailDownloadUrl,
+        videoUrl: videoDownloadUrl,
+        thumbnailUrl: thumbnailDownloadUrl,
         publishedDateTime: DateTime.now().millisecondsSinceEpoch,
       );
       await FirebaseFirestore.instance

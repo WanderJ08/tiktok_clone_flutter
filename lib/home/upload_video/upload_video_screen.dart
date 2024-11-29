@@ -35,8 +35,8 @@ class _UploadVideoScreenState extends State<UploadVideoScreen> {
             onPressed: () {
               getVideoFile(ImageSource.gallery);
             },
-            child: Row(
-              children: const [
+            child: const Row(
+              children: [
                 Icon(Icons.image),
                 Padding(
                   padding: EdgeInsets.all(8),
@@ -52,8 +52,8 @@ class _UploadVideoScreenState extends State<UploadVideoScreen> {
             onPressed: () {
               getVideoFile(ImageSource.camera);
             },
-            child: Row(
-              children: const [
+            child: const Row(
+              children: [
                 Icon(Icons.camera_alt),
                 Padding(
                   padding: EdgeInsets.all(8),
@@ -70,8 +70,8 @@ class _UploadVideoScreenState extends State<UploadVideoScreen> {
             onPressed: () {
               Get.back(); // Cierra el diálogo
             },
-            child: Row(
-              children: const [
+            child: const Row(
+              children: [
                 Icon(Icons.cancel),
                 Padding(
                   padding: EdgeInsets.all(8),

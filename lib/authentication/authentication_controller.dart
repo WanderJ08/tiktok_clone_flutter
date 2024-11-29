@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
+
 import 'package:tiktok_clone/authentication/login_screen.dart';
 import 'package:tiktok_clone/authentication/registration_screen.dart';
 import 'package:tiktok_clone/global.dart';
