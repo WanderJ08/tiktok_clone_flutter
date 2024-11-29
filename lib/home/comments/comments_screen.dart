@@ -20,7 +20,7 @@ class CommentsScreen extends StatelessWidget {
         child: Column(
           children: [
             //display comments
-
+            
             //Comments box
             Container(
                 color: Colors.white24,
