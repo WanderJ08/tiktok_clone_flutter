@@ -35,6 +35,22 @@ class CommentsController extends GetxController {
           .collection("comments")
           .doc(commentID)
           .set(commentModel.toJson());
+
+      //update comments counter
+      DocumentSnapshot currentVideoSnapshotDocument = await FirebaseFirestore
+          .instance
+          .collection("videos")
+          .doc(currentVideoID)
+          .get();
+
+      await FirebaseFirestore.instance
+          .collection("videos")
+          .doc(currentVideoID)
+          .update({
+        "totalComments":
+            (currentVideoSnapshotDocument.data() as dynamic)["totalComments"] +
+                1
+      });
     } catch (errorMsg) {
       Get.snackbar(
           "Error In Posting New Comment", "Message:" + errorMsg.toString());

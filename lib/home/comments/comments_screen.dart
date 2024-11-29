@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:tiktok_clone/home/comments/comments_controller.dart';
 
 class CommentsScreen extends StatelessWidget {
   final String videoID;
 
   CommentsScreen({required this.videoID});
 
+  TextEditingController commentTextEditingController = TextEditingController();
+  CommentsController commentsController = Get.put(CommentsController());
   @override
   Widget build(BuildContext context) {
-    TextEditingController commentTextEditingController =
-        TextEditingController();
+    commentsController.updatedCurrentVideoID(videoID);
     return Scaffold(
         body: SingleChildScrollView(
       child: SizedBox(
@@ -41,7 +44,14 @@ class CommentsScreen extends StatelessWidget {
                     ),
                   ),
                   trailing: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        if (commentTextEditingController.text.isNotEmpty) {
+                          commentsController.saveNewCommentToDatabase(
+                              commentTextEditingController.text);
+
+                          commentTextEditingController.clear();
+                        }
+                      },
                       icon: const Icon(
                         Icons.send,
                         size: 40,
