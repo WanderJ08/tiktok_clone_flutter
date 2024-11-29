@@ -3,16 +3,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tiktok_clone/global.dart';
 import 'package:tiktok_clone/home/home_screen.dart';
 import 'package:tiktok_clone/home/upload_video/video.dart';
 import 'package:video_compress/video_compress.dart';
 
 class UploadController extends GetxController {
   compressVideoFile(String videoFilePath) async {
-    final compressVideoFilePath = await VideoCompress.compressVideo(
+    final compressedVideoFilePath = await VideoCompress.compressVideo(
         videoFilePath,
         quality: VideoQuality.LowQuality);
-    return compressVideoFilePath!.file;
+    return compressedVideoFilePath!.file;
   }
 
   uploadCompressedVideoFileToFirebaseStorage(
@@ -35,7 +36,7 @@ class UploadController extends GetxController {
     return thumbnailImage;
   }
 
-  uploadThumbnailImagetoFirebaseStorage(
+  uploadThumbnailImageToFirebaseStorage(
       String videoID, String videoFilePath) async {
     UploadTask thumbnailUploadTask = FirebaseStorage.instance
         .ref()
@@ -68,7 +69,7 @@ class UploadController extends GetxController {
               videoID, videoFilePath);
       //2.Upload thumbnail to firebase storage
       String thumbnailDownloadUrl =
-          await uploadThumbnailImagetoFirebaseStorage(videoID, videoFilePath);
+          await uploadThumbnailImageToFirebaseStorage(videoID, videoFilePath);
 
       //3. Save video information to firestore database
       Video videoObject = Video(
@@ -90,7 +91,7 @@ class UploadController extends GetxController {
           .collection("videos")
           .doc(videoID)
           .set(videoObject.toJson());
-
+      showProgressBar = false;
       Get.to(HomeScreen());
 
       Get.snackbar("New Video", "You have successfully uploaded a new video");

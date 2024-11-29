@@ -1,8 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
 import 'package:tiktok_clone/global.dart';
+import 'package:tiktok_clone/home/upload_video/upload_controller.dart';
 import 'package:tiktok_clone/widgets/input_text_widgets.dart';
 import 'package:video_player/video_player.dart';
 
@@ -17,6 +19,7 @@ class UploadForm extends StatefulWidget {
 }
 
 class _UploadFormState extends State<UploadForm> {
+  UploadController uploadVideoController = Get.put(UploadController());
   VideoPlayerController? playerController;
   TextEditingController artistSongTextEditingController =
       TextEditingController();
@@ -70,7 +73,7 @@ class _UploadFormState extends State<UploadForm> {
                       Colors.amber,
                       Colors.purpleAccent,
                     ],
-                    animationDuration: 3,
+                    animationDuration: 20,
                     backColor: Colors.white38,
                   ))
                 : Column(
@@ -117,10 +120,20 @@ class _UploadFormState extends State<UploadForm> {
                         ),
                         child: InkWell(
                           onTap: () {
-                            setState(() {
-                              if (artistSongTextEditingController
-                                  .text.isNotEmpty) showProgressBar = true;
-                            });
+                            if (artistSongTextEditingController
+                                    .text.isNotEmpty &&
+                                descriptionTagsTextEditingController
+                                    .text.isNotEmpty) {
+                              uploadVideoController
+                                  .saveVideoInformationToFirestoreDatabase(
+                                      artistSongTextEditingController.text,
+                                      descriptionTagsTextEditingController.text,
+                                      widget.videoPath,
+                                      context);
+                              setState(() {
+                                showProgressBar = true;
+                              });
+                            }
                           },
                           child: const Center(
                             child: Text(
