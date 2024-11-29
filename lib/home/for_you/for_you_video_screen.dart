@@ -106,41 +106,44 @@ class _ForYouVideoScreenState extends State<ForYouVideoScreen> {
                           Container(
                             width: 100,
                             margin: EdgeInsets.only(
-                              top: MediaQuery.of(context).size.height / 5,
+                              top: MediaQuery.of(context).size.height / 4,
                             ),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 // User profile image
-                                SizedBox(
-                                  width: 62,
-                                  height: 62,
-                                  child: Stack(
-                                    children: [
-                                      Positioned(
-                                        left: 4,
-                                        child: Container(
-                                          width: 52,
-                                          height: 52,
-                                          padding: const EdgeInsets.all(2),
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius:
-                                                BorderRadius.circular(25),
-                                          ),
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(25),
-                                            child: Image(
-                                              image: NetworkImage(
-                                                eachVideoInfo.userProfileImage
-                                                    .toString(),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 8.0),
+                                  child: SizedBox(
+                                    width: 62,
+                                    height: 62,
+                                    child: Stack(
+                                      children: [
+                                        Positioned(
+                                          left: 4,
+                                          child: Container(
+                                            width: 52,
+                                            height: 52,
+                                            padding: const EdgeInsets.all(2),
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(25),
+                                            ),
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(25),
+                                              child: Image(
+                                                image: NetworkImage(
+                                                  eachVideoInfo.userProfileImage
+                                                      .toString(),
+                                                ),
                                               ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
 
@@ -148,7 +151,12 @@ class _ForYouVideoScreenState extends State<ForYouVideoScreen> {
                                 Column(
                                   children: [
                                     IconButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        controllerVideosForYou
+                                            .likeOrUnlikeVideo(eachVideoInfo
+                                                .videoID
+                                                .toString());
+                                      },
                                       icon: Icon(
                                         Icons.favorite_rounded,
                                         size: 40,
@@ -159,12 +167,15 @@ class _ForYouVideoScreenState extends State<ForYouVideoScreen> {
                                             : Colors.white,
                                       ),
                                     ),
-                                    Text(
-                                      eachVideoInfo.likesList!.length
-                                          .toString(),
-                                      style: const TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.white,
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 8.0),
+                                      child: Text(
+                                        eachVideoInfo.likesList!.length
+                                            .toString(),
+                                        style: const TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.white,
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -181,11 +192,14 @@ class _ForYouVideoScreenState extends State<ForYouVideoScreen> {
                                         color: Colors.white,
                                       ),
                                     ),
-                                    Text(
-                                      eachVideoInfo.totalComments!.toString(),
-                                      style: const TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.white,
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 8.0),
+                                      child: Text(
+                                        eachVideoInfo.totalComments!.toString(),
+                                        style: const TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.white,
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -202,47 +216,55 @@ class _ForYouVideoScreenState extends State<ForYouVideoScreen> {
                                         color: Colors.white,
                                       ),
                                     ),
-                                    Text(
-                                      eachVideoInfo.totalShares!.toString(),
-                                      style: const TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.white,
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 8.0),
+                                      child: Text(
+                                        eachVideoInfo.totalShares!.toString(),
+                                        style: const TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.white,
+                                        ),
                                       ),
                                     ),
 
                                     //profile circular animation
-                                    CircularImageAnimation(
-                                      widgetAnimation: SizedBox(
-                                        width: 62,
-                                        height: 62,
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              padding: const EdgeInsets.all(12),
-                                              height: 52,
-                                              width: 52,
-                                              decoration: BoxDecoration(
-                                                gradient: const LinearGradient(
-                                                    colors: [
-                                                      Colors.grey,
-                                                      Colors.white,
-                                                    ]),
-                                                borderRadius:
-                                                    BorderRadius.circular(25),
-                                              ),
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(25),
-                                                child: Image(
-                                                  image: NetworkImage(
-                                                      eachVideoInfo
-                                                          .userProfileImage
-                                                          .toString()),
-                                                  fit: BoxFit.cover,
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 8.0),
+                                      child: CircularImageAnimation(
+                                        widgetAnimation: SizedBox(
+                                          width: 62,
+                                          height: 62,
+                                          child: Column(
+                                            children: [
+                                              Container(
+                                                padding:
+                                                    const EdgeInsets.all(12),
+                                                height: 52,
+                                                width: 52,
+                                                decoration: BoxDecoration(
+                                                  gradient:
+                                                      const LinearGradient(
+                                                          colors: [
+                                                        Colors.grey,
+                                                        Colors.white,
+                                                      ]),
+                                                  borderRadius:
+                                                      BorderRadius.circular(25),
+                                                ),
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(25),
+                                                  child: Image(
+                                                    image: NetworkImage(
+                                                        eachVideoInfo
+                                                            .userProfileImage
+                                                            .toString()),
+                                                    fit: BoxFit.cover,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),
