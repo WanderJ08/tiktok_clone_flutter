@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
 import 'package:tiktok_clone/authentication/authentication_controller.dart';
 import 'package:tiktok_clone/authentication/registration_screen.dart';
-import 'package:tiktok_clone/global.dart';
 import 'package:tiktok_clone/widgets/input_text_widgets.dart';
 
 class LoginScreen extends StatefulWidget {
