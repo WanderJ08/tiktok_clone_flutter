@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tiktok_clone/home/comments/comments_screen.dart';
 import 'package:tiktok_clone/home/for_you/controller_for_you_videos.dart';
 import 'package:tiktok_clone/widgets/circular_image_animation.dart';
 import 'package:tiktok_clone/widgets/custom_video_player.dart';
@@ -185,7 +186,11 @@ class _ForYouVideoScreenState extends State<ForYouVideoScreen> {
                                 Column(
                                   children: [
                                     IconButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Get.to(CommentsScreen(
+                                            videoID: eachVideoInfo.videoID
+                                                .toString()));
+                                      },
                                       icon: const Icon(
                                         Icons.add_comment,
                                         size: 40,
