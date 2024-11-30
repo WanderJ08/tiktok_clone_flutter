@@ -9,6 +9,8 @@ class ProfileController extends GetxController {
 
   updateCurrentUserID(String visitUserID) {
     _userID.value = visitUserID;
+
+    retrieveUserInformation();
   }
 
   retrieveUserInformation() async {
@@ -23,10 +25,12 @@ class ProfileController extends GetxController {
     String userEmail = userInfo['email'];
     String userImage = userInfo['image'];
     String userUID = userInfo['uid'];
-    String userYoutube = userInfo['youtube'];
-    String userInstagram = userInfo['instagram'];
-    String userTwitter = userInfo['twitter'];
-    String userFacebook = userInfo['facebook'];
+    String userYoutube = userInfo['youtube'] == null ? "" : userInfo['youtube'];
+    String userInstagram =
+        userInfo['instagram'] == null ? "" : userInfo['instagram'];
+    String userTwitter = userInfo['twitter'] == null ? "" : userInfo['twitter'];
+    String userFacebook =
+        userInfo['facebook'] == null ? "" : userInfo['facebookS'];
 
     int totalLikes = 0;
     int totalFollowers = 0;
