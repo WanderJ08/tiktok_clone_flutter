@@ -11,6 +11,8 @@ class CommentsController extends GetxController {
 
   updatedCurrentVideoID(String videoID) {
     currentVideoID = videoID;
+
+    retrieveComments();
   }
 
   saveNewCommentToDatabase(String commentTextData) async {
@@ -76,5 +78,40 @@ class CommentsController extends GetxController {
         return commentsListOfVideo;
       }),
     );
+  }
+
+  LikeunLikeComment(String commentID) async {
+    //like or unlike comment
+    DocumentSnapshot commentDocumentSnapshot = await FirebaseFirestore.instance
+        .collection("videos")
+        .doc(currentVideoID)
+        .collection("comments")
+        .doc(commentID)
+        .get();
+    //unlike comment feature - red heart button
+    if ((commentDocumentSnapshot.data() as dynamic)["commentLikesList"]
+        .contains(FirebaseAuth.instance.currentUser!.uid)) {
+      await FirebaseFirestore.instance
+          .collection("videos")
+          .doc(currentVideoID)
+          .collection("comments")
+          .doc(commentID)
+          .update({
+        "commentLikesList":
+            FieldValue.arrayRemove([FirebaseAuth.instance.currentUser!.uid]),
+      });
+    }
+    //like comment feature - white heart button
+    else {
+      await FirebaseFirestore.instance
+          .collection("videos")
+          .doc(currentVideoID)
+          .collection("comments")
+          .doc(commentID)
+          .update({
+        "commentLikesList":
+            FieldValue.arrayUnion([FirebaseAuth.instance.currentUser!.uid])
+      });
+    }
   }
 }
