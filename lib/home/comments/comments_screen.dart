@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tiktok_clone/home/comments/comments_controller.dart';
+import 'package:timeago/timeago.dart' as tAgo;
 
 class CommentsScreen extends StatelessWidget {
   final String videoID;
@@ -20,7 +22,95 @@ class CommentsScreen extends StatelessWidget {
         child: Column(
           children: [
             //display comments
-            
+            Expanded(
+              child: Obx(() {
+                return ListView.builder(
+                  itemCount: commentsController.listOfComments.length,
+                  itemBuilder: (context, index) {
+                    final eachCommentInfo =
+                        commentsController.listOfComments[index];
+
+                    return Padding(
+                      padding: const EdgeInsets.all(2.0),
+                      child: Card(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 2.0, bottom: 2.0),
+                          child: ListTile(
+                            leading: CircleAvatar(
+                              backgroundColor: Colors.black,
+                              backgroundImage: NetworkImage(
+                                  eachCommentInfo.userProfileImage.toString()),
+                            ),
+                            title: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  eachCommentInfo.userName.toString(),
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 4,
+                                ),
+                                Text(
+                                  eachCommentInfo.commentText.toString(),
+                                  style: const TextStyle(
+                                    fontSize: 15,
+                                    color: Colors.white70,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 7,
+                                ),
+                              ],
+                            ),
+                            subtitle: Row(
+                              children: [
+                                Text(
+                                  tAgo.format(eachCommentInfo.publishedDateTime
+                                      .toDate()),
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  eachCommentInfo.commentLikesList!.length
+                                          .toString() +
+                                      " likes",
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            trailing: IconButton(
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.favorite,
+                                  color: eachCommentInfo.commentLikesList!
+                                          .contains(FirebaseAuth
+                                              .instance.currentUser!.uid)
+                                      ? Colors.red
+                                      : Colors.white,
+                                  size: 30,
+                                )),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                );
+              }),
+            ),
             //Comments box
             Container(
                 color: Colors.white24,

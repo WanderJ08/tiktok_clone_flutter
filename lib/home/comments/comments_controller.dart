@@ -11,6 +11,8 @@ class CommentsController extends GetxController {
 
   updatedCurrentVideoID(String videoID) {
     currentVideoID = videoID;
+
+    retrieveComments();
   }
 
   saveNewCommentToDatabase(String commentTextData) async {
