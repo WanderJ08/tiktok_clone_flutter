@@ -97,7 +97,7 @@ class AuthenticationController extends GetxController {
       Get.snackbar("Logged-in Successful",
           "Congratulations, you're logged-in successfully.");
       showProgressBar = false;
-      Get.to(RegistrationScreen());
+      Get.to(HomeScreen());
     } catch (error) {
       Get.snackbar(
           "Login unsuccessful", "Error occured during authentication process.");

@@ -1,10 +1,10 @@
-import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tiktok_clone/home/following/followings_video_screen.dart';
 import 'package:tiktok_clone/home/for_you/for_you_video_screen.dart';
 import 'package:tiktok_clone/home/search/search_screen.dart';
 import 'package:tiktok_clone/home/upload_video/upload_custom_icon.dart';
 import 'package:tiktok_clone/home/upload_video/upload_video_screen.dart';
+import 'package:tiktok_clone/home/profile/profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -20,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
     SearchScreen(),
     UploadVideoScreen(),
     FollowingsVideoScreen(),
-    ProfileScreen()
+    ProfileScreen(),
   ];
   @override
   Widget build(BuildContext context) {

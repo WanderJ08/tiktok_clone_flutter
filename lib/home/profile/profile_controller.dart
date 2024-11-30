@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
 class ProfileController extends GetxController {
@@ -21,16 +20,16 @@ class ProfileController extends GetxController {
 
     final userInfo = userDocumentSnapshot.data() as dynamic;
 
-    String userName = userInfo['name'];
-    String userEmail = userInfo['email'];
-    String userImage = userInfo['image'];
-    String userUID = userInfo['uid'];
-    String userYoutube = userInfo['youtube'] == null ? "" : userInfo['youtube'];
+    String userName = userInfo["name"];
+    String userEmail = userInfo["email"];
+    String userImage = userInfo["image"];
+    String userUID = userInfo["uid"];
+    String userYoutube = userInfo["youtube"] == null ? "" : userInfo["youtube"];
     String userInstagram =
-        userInfo['instagram'] == null ? "" : userInfo['instagram'];
-    String userTwitter = userInfo['twitter'] == null ? "" : userInfo['twitter'];
+        userInfo["instagram"] == null ? "" : userInfo["instagram"];
+    String userTwitter = userInfo["twitter"] == null ? "" : userInfo["twitter"];
     String userFacebook =
-        userInfo['facebook'] == null ? "" : userInfo['facebookS'];
+        userInfo["facebook"] == null ? "" : userInfo["facebook"];
 
     int totalLikes = 0;
     int totalFollowers = 0;
@@ -39,17 +38,17 @@ class ProfileController extends GetxController {
     List<String> thumbnailsList = [];
 
     _userMap.value = {
-      "name": userName,
-      "email": userEmail,
-      "image": userImage,
-      "uid": userUID,
-      "youtube": userYoutube,
-      "instagram": userInstagram,
-      "twitter": userTwitter,
-      "facebook": userFacebook,
-      "totalLikes": totalLikes,
-      "totalFollowers": totalFollowers,
-      "totalFollowings": totalFollowings,
+      "userName": userName,
+      "userEmail": userEmail,
+      "userImage": userImage,
+      "userIUD": userUID,
+      "userYoutube": userYoutube,
+      "userInstagram": userInstagram,
+      "userTwitter": userTwitter,
+      "userFacebook": userFacebook,
+      "totalLikes": totalLikes.toString(),
+      "totalFollowers": totalFollowers.toString(),
+      "totalFollowings": totalFollowings.toString(),
       "isFollowing": isFollowing,
       "thumnailsList": thumbnailsList,
     };
