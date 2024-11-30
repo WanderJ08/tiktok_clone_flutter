@@ -93,7 +93,10 @@ class CommentsScreen extends StatelessWidget {
                               ],
                             ),
                             trailing: IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  commentsController.LikeunLikeComment(
+                                      eachCommentInfo.commentID.toString());
+                                },
                                 icon: Icon(
                                   Icons.favorite,
                                   color: eachCommentInfo.commentLikesList!
