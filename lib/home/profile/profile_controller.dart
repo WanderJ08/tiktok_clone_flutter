@@ -27,5 +27,29 @@ class ProfileController extends GetxController {
     String userInstagram = userInfo['instagram'];
     String userTwitter = userInfo['twitter'];
     String userFacebook = userInfo['facebook'];
+
+    int totalLikes = 0;
+    int totalFollowers = 0;
+    int totalFollowings = 0;
+    bool isFollowing = true;
+    List<String> thumbnailsList = [];
+
+    _userMap.value = {
+      "name": userName,
+      "email": userEmail,
+      "image": userImage,
+      "uid": userUID,
+      "youtube": userYoutube,
+      "instagram": userInstagram,
+      "twitter": userTwitter,
+      "facebook": userFacebook,
+      "totalLikes": totalLikes,
+      "totalFollowers": totalFollowers,
+      "totalFollowings": totalFollowings,
+      "isFollowing": isFollowing,
+      "thumnailsList": thumbnailsList,
+    };
+
+    update();
   }
 }
