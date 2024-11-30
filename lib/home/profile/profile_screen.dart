@@ -52,6 +52,119 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               centerTitle: true,
             ),
+            body: SafeArea(
+              child: SingleChildScrollView(
+                child: Column(children: [
+                  ClipOval(
+                    child: Image.network(
+                      controllerProfile.userMap['userImage'],
+                      height: 100,
+                      width: 120,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  //Followers and Following - likes
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      //following
+                      GestureDetector(
+                        onTap: () {},
+                        child: Column(
+                          children: [
+                            Text(
+                              controllerProfile.userMap["totalFollowings"]
+                                  .toString(),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 6,
+                            ),
+                            const Text(
+                              "Followings",
+                              style: TextStyle(
+                                fontSize: 14,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        color: Colors.black54,
+                        width: 1,
+                        height: 15,
+                        margin: const EdgeInsets.symmetric(horizontal: 15),
+                      ),
+                      //followers
+                      GestureDetector(
+                          onTap: () {},
+                          child: Column(
+                            children: [
+                              Text(
+                                controllerProfile.userMap["totalFollowers"]
+                                    .toString(),
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 6,
+                              ),
+                              const Text(
+                                "Followers",
+                                style: TextStyle(
+                                  fontSize: 14,
+                                ),
+                              ),
+                              Container(
+                                color: Colors.black54,
+                                width: 1,
+                                height: 15,
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 15),
+                              ),
+                              //Likes
+                              GestureDetector(
+                                onTap: () {},
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      controllerProfile.userMap["totalLikes"]
+                                          .toString(),
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 6,
+                                    ),
+                                    const Text(
+                                      "Likes",
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          )),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  //user Social links
+                ]),
+              ),
+            ),
           );
         });
   }
