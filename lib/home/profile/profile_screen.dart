@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tiktok_clone/home/profile/profile_controller.dart';
+import 'package:tiktok_clone/settings/account_settings_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -24,6 +25,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Future<void> launchUserSocialProfile(String socialLink) async {
     if (!await launchUrl(Uri.parse("https://" + socialLink))) {
       throw Exception("Could not launch" + socialLink);
+    }
+  }
+
+  handleClickEvent(String choiceClicked) {
+    switch (choiceClicked) {
+      case "Settings":
+        Get.to(AccountSettingsScreen());
+        break;
+      case "Logout":
+        FirebaseAuth.instance.signOut();
+        Get.snackbar("Logged Out", "You are successfully logged out");
+        break;
     }
   }
 
@@ -58,6 +71,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             centerTitle: true,
+            actions: [
+              PopupMenuButton<String>(
+                onSelected: handleClickEvent,
+                itemBuilder: (BuildContext context) {
+                  return {
+                    "Settings",
+                    "Logout",
+                  }.map((String choiseClicked) {
+                    return PopupMenuItem<String>(
+                      value: choiseClicked,
+                      child: Text(choiseClicked),
+                    );
+                  }).toList();
+                },
+              ),
+            ],
           ),
           body: SafeArea(
             child: SingleChildScrollView(
