@@ -106,6 +106,7 @@ class AuthenticationController extends GetxController {
   }
 
   goToScreen(User? currentUser) {
+    //when usar click on signUP button
     if (currentUser == null) {
       //When user is NOT logged-in
       Get.offAll(LoginScreen());
