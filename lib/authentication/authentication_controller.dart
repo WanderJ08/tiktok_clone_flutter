@@ -5,7 +5,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
 
 import 'package:tiktok_clone/authentication/login_screen.dart';
-import 'package:tiktok_clone/authentication/registration_screen.dart';
 import 'package:tiktok_clone/global.dart';
 import 'package:tiktok_clone/home/home_screen.dart';
 import 'dart:io';

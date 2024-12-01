@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tiktok_clone/global.dart';
 import 'package:tiktok_clone/home/profile/profile_controller.dart';
 import 'package:tiktok_clone/settings/account_settings_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -16,11 +18,34 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   ProfileController controllerProfile = Get.put(ProfileController());
+  bool isFollowingUser = false;
+
   @override
   void initState() {
     // TODO: implement initState
 
     controllerProfile.updateCurrentUserID(widget.visitUserID.toString());
+    getIsFollowingValue();
+  }
+
+  getIsFollowingValue() {
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(widget.visitUserID.toString())
+        .collection("followers")
+        .doc(currentUserId)
+        .get()
+        .then((value) {
+      if (value.exists) {
+        setState(() {
+          isFollowingUser = true;
+        });
+      } else {
+        setState(() {
+          isFollowingUser = false;
+        });
+      }
+    });
   }
 
   Future<void> launchUserSocialProfile(String socialLink) async {
@@ -73,20 +98,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             centerTitle: true,
             actions: [
-              PopupMenuButton<String>(
-                onSelected: handleClickEvent,
-                itemBuilder: (BuildContext context) {
-                  return {
-                    "Settings",
-                    "Logout",
-                  }.map((String choiseClicked) {
-                    return PopupMenuItem<String>(
-                      value: choiseClicked,
-                      child: Text(choiseClicked),
-                    );
-                  }).toList();
-                },
-              ),
+              widget.visitUserID.toString() == currentUserId
+                  ? PopupMenuButton<String>(
+                      onSelected: handleClickEvent,
+                      itemBuilder: (BuildContext context) {
+                        return {
+                          "Settings",
+                          "Logout",
+                        }.map((String choiseClicked) {
+                          return PopupMenuItem<String>(
+                            value: choiseClicked,
+                            child: Text(choiseClicked),
+                          );
+                        }).toList();
+                      },
+                    )
+                  : Container(),
             ],
           ),
           body: SafeArea(
@@ -281,6 +308,71 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         width: 10,
                       ),
                     ],
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  //Follow - unfolow - signout
+                  ElevatedButton(
+                    onPressed: () {
+                      //if it is the user own profile - user view his/her own profile
+                      //signout
+                      if (widget.visitUserID.toString() == currentUserId) {
+                        FirebaseAuth.instance.signOut();
+                        Get.snackbar(
+                            "Logged Out", "You are successfully logged out");
+                      }
+                      //user view other user profile
+                      //follow - unfollow button
+                      else {
+                        //if already i am following other user
+                        //unfollow button
+                        if (isFollowingUser == true) {
+                          setState(() {
+                            isFollowingUser = false;
+                          });
+                        }
+                        //if im not already following other user
+                        //follow button
+                        else {
+                          setState(() {
+                            isFollowingUser = true;
+                          });
+                        }
+                        controllerProfile.followUnFollowUser();
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.transparent,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 90,
+                      ),
+                      shape: widget.visitUserID.toString() == currentUserId
+                          ? RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18),
+                              side: const BorderSide(color: Colors.red),
+                            )
+                          : isFollowingUser == true
+                              ? RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18),
+                                  side: const BorderSide(color: Colors.red),
+                                )
+                              : RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18),
+                                  side: const BorderSide(color: Colors.green),
+                                ),
+                    ),
+                    child: Text(
+                      widget.visitUserID.toString() == currentUserId
+                          ? "Sign Out"
+                          : isFollowingUser == true
+                              ? "Unfollow"
+                              : "Follow",
+                      style: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ],
               ),
