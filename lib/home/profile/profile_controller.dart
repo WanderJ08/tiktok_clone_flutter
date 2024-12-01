@@ -14,6 +14,7 @@ class ProfileController extends GetxController {
   }
 
   retrieveUserInformation() async {
+    //get user info
     DocumentSnapshot userDocumentSnapshot = await FirebaseFirestore.instance
         .collection('users')
         .doc(_userID.value)
@@ -37,6 +38,18 @@ class ProfileController extends GetxController {
     int totalFollowings = 0;
     bool isFollowing = false;
     List<String> thumbnailsList = [];
+
+    //get the users videos info
+    var currentUserVideos = await FirebaseFirestore.instance
+        .collection("videos")
+        .orderBy("publishedDateTime", descending: true)
+        .where("userID", isEqualTo: _userID.value)
+        .get();
+
+    for (int i = 0; i < currentUserVideos.docs.length; i++) {
+      thumbnailsList
+          .add((currentUserVideos.docs[i].data() as dynamic)["thumbnailUrl"]);
+    }
 
     //get total number of followers
     var followersNumDocument = await FirebaseFirestore.instance

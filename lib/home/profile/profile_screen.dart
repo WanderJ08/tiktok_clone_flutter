@@ -374,6 +374,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
                   ),
+
+                  //user's videos - thumnails
+                  GridView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount:
+                        controllerProfile.userMap["thumnailsList"].length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      childAspectRatio: .7,
+                      crossAxisSpacing: 2,
+                    ),
+                    itemBuilder: (context, index) {
+                      String eachThumbnailUrl =
+                          controllerProfile.userMap["thumnailsList"][index];
+
+                      return GestureDetector(
+                        onTap: () {},
+                        child: Image.network(
+                          eachThumbnailUrl,
+                          fit: BoxFit.cover,
+                        ),
+                      );
+                    },
+                  ),
                 ],
               ),
             ),
