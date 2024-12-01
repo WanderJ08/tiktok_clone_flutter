@@ -6,7 +6,9 @@ import 'package:tiktok_clone/settings/account_settings_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+  String? visitUserID;
+
+  ProfileScreen({this.visitUserID});
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -18,8 +20,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     // TODO: implement initState
 
-    controllerProfile
-        .updateCurrentUserID(FirebaseAuth.instance.currentUser!.uid);
+    controllerProfile.updateCurrentUserID(widget.visitUserID.toString());
   }
 
   Future<void> launchUserSocialProfile(String socialLink) async {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tiktok_clone/home/profile/profile_screen.dart';
 import 'package:tiktok_clone/home/search/search_controller.dart' as custom;
 import 'package:tiktok_clone/authentication/user.dart';
 
@@ -66,7 +67,11 @@ class _SearchScreenState extends State<SearchScreen> {
                     padding: const EdgeInsets.only(left: 20, right: 20, top: 4),
                     child: Card(
                       child: InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Get.to(ProfileScreen(
+                            visitUserID: eachSearhedUserRecord.uid.toString(),
+                          ));
+                        },
                         child: ListTile(
                           leading: CircleAvatar(
                             backgroundImage: NetworkImage(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tiktok_clone/global.dart';
 import 'package:tiktok_clone/home/following/followings_video_screen.dart';
 import 'package:tiktok_clone/home/for_you/for_you_video_screen.dart';
 import 'package:tiktok_clone/home/search/search_screen.dart';
@@ -20,7 +21,9 @@ class _HomeScreenState extends State<HomeScreen> {
     SearchScreen(),
     UploadVideoScreen(),
     FollowingsVideoScreen(),
-    ProfileScreen(),
+    ProfileScreen(
+      visitUserID: currentUserId,
+    ),
   ];
   @override
   Widget build(BuildContext context) {
