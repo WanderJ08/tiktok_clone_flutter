@@ -51,6 +51,12 @@ class ProfileController extends GetxController {
           .add((currentUserVideos.docs[i].data() as dynamic)["thumbnailUrl"]);
     }
 
+    //get total number of likes
+    for (var eachVideo in currentUserVideos.docs) {
+      totalLikes = totalLikes +
+          ((eachVideo.data() as dynamic)["likesList"] as List).length;
+    }
+
     //get total number of followers
     var followersNumDocument = await FirebaseFirestore.instance
         .collection("users")
