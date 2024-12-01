@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tiktok_clone/global.dart';
+import 'package:tiktok_clone/home/profile/followingScreen/following_screen.dart';
 import 'package:tiktok_clone/home/profile/profile_controller.dart';
 import 'package:tiktok_clone/home/profile/video_player_profile.dart';
 import 'package:tiktok_clone/settings/account_settings_screen.dart';
@@ -153,7 +154,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     children: [
                       //following
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Get.to(
+                            FollowingScreen(
+                                visitedProfileUserID:
+                                    widget.visitUserID.toString()),
+                          );
+                        },
                         child: Column(
                           children: [
                             Text(

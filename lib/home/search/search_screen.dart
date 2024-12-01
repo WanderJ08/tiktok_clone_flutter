@@ -91,7 +91,12 @@ class _SearchScreenState extends State<SearchScreen> {
                             ),
                           ),
                           trailing: IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Get.to(ProfileScreen(
+                                  visitUserID:
+                                      eachSearhedUserRecord.uid.toString(),
+                                ));
+                              },
                               icon: const Icon(
                                 Icons.navigate_next_outlined,
                                 size: 24,
