@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tiktok_clone/global.dart';
 import 'package:tiktok_clone/home/profile/profile_controller.dart';
+import 'package:tiktok_clone/home/profile/video_player_profile.dart';
 import 'package:tiktok_clone/settings/account_settings_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -63,6 +64,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
         FirebaseAuth.instance.signOut();
         Get.snackbar("Logged Out", "You are successfully logged out");
         break;
+    }
+  }
+
+  readClickedThumbnailInfo(String clickedThumbnailUrl) async {
+    var allVideosDocs =
+        await FirebaseFirestore.instance.collection("videos").get();
+
+    for (int i = 0; i < allVideosDocs.docs.length; i++) {
+      if ((allVideosDocs.docs[i].data() as dynamic)["thumbnailUrl"] ==
+          clickedThumbnailUrl) {
+        Get.to(
+          () => VideoPlayerProfile(
+              clickedVideoID:
+                  (allVideosDocs.docs[i].data() as dynamic)["videoID"]),
+        );
+      }
     }
   }
 
@@ -392,7 +409,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           controllerProfile.userMap["thumnailsList"][index];
 
                       return GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          readClickedThumbnailInfo(eachThumbnailUrl);
+                        },
                         child: Image.network(
                           eachThumbnailUrl,
                           fit: BoxFit.cover,
