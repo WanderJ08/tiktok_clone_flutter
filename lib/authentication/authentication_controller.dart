@@ -5,7 +5,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
 
 import 'package:tiktok_clone/authentication/login_screen.dart';
-import 'package:tiktok_clone/authentication/registration_screen.dart';
 import 'package:tiktok_clone/global.dart';
 import 'package:tiktok_clone/home/home_screen.dart';
 import 'dart:io';
@@ -97,7 +96,7 @@ class AuthenticationController extends GetxController {
       Get.snackbar("Logged-in Successful",
           "Congratulations, you're logged-in successfully.");
       showProgressBar = false;
-      Get.to(RegistrationScreen());
+      Get.to(HomeScreen());
     } catch (error) {
       Get.snackbar(
           "Login unsuccessful", "Error occured during authentication process.");
@@ -106,6 +105,7 @@ class AuthenticationController extends GetxController {
   }
 
   goToScreen(User? currentUser) {
+    //when usar click on signUP button
     if (currentUser == null) {
       //When user is NOT logged-in
       Get.offAll(LoginScreen());
