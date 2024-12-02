@@ -139,11 +139,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  ClipOval(
-                    child: Image.network(
+                  CircleAvatar(
+                    radius: 50,
+                    backgroundImage: NetworkImage(
                       controllerProfile.userMap['userImage'],
-                      height: 100,
-                      width: 120,
                     ),
                   ),
                   const SizedBox(
