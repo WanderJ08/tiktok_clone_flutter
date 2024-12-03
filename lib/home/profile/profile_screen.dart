@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:tiktok_clone/global.dart';
 import 'package:tiktok_clone/home/profile/followersScreen/followers_screen.dart';
@@ -65,6 +66,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
       case "Logout":
         FirebaseAuth.instance.signOut();
         Get.snackbar("Logged Out", "You are successfully logged out");
+        Future.delayed(const Duration(milliseconds: 1000), () {
+          SystemChannels.platform.invokeMethod("SystemNavigator.pop");
+        });
         break;
     }
   }
@@ -351,6 +355,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         FirebaseAuth.instance.signOut();
                         Get.snackbar(
                             "Logged Out", "You are successfully logged out");
+                        Future.delayed(const Duration(milliseconds: 1000), () {
+                          SystemChannels.platform
+                              .invokeMethod("SystemNavigator.pop");
+                        });
                       }
                       //user view other user profile
                       //follow - unfollow button

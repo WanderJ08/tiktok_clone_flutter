@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tiktok_clone/home/comments/comments_screen.dart';
-import 'package:tiktok_clone/home/for_you/controller_for_you_videos.dart';
 import 'package:tiktok_clone/home/profile/video_controller_profile.dart';
 import 'package:tiktok_clone/widgets/circular_image_animation.dart';
 import 'package:tiktok_clone/widgets/custom_video_player.dart';

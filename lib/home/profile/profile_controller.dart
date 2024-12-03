@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:tiktok_clone/global.dart';
+import 'package:tiktok_clone/home/home_screen.dart';
 
 class ProfileController extends GetxController {
   final Rx<Map<String, dynamic>> _userMap = Rx<Map<String, dynamic>>({});
@@ -163,5 +164,27 @@ class ProfileController extends GetxController {
     }
 
     update(); // Notificar cambios
+  }
+
+  updateUserSocialAccountLinks(
+      String facebook, String youtube, String twitter, String instagram) async {
+    try {
+      final Map<String, dynamic> userSocialLinksMap = {
+        "facebook": facebook,
+        "youtube": youtube,
+        "twitter": twitter,
+        "instagram": instagram,
+      };
+      await FirebaseFirestore.instance
+          .collection("users")
+          .doc(currentUserId)
+          .update(userSocialLinksMap);
+
+      Get.snackbar("Social Links", "Account updated successfully");
+
+      Get.to(HomeScreen());
+    } catch (errorMsg) {
+      Get.snackbar("Error updating Account", "Please try again ");
+    }
   }
 }

@@ -157,6 +157,25 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
                     height: 15,
                   ),
                   //update button
+
+                  ElevatedButton(
+                    child: const Text(
+                      "Update Now",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    onPressed: () {
+                      controllerProfile.updateUserSocialAccountLinks(
+                        facebookTextEditingController.text,
+                        youtubeTextEditingController.text,
+                        instagramTextEditingController.text,
+                        twitterTextEditingController.text,
+                      );
+                    },
+                  )
                 ],
               ),
             ),
